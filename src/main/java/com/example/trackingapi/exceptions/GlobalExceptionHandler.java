@@ -1,5 +1,6 @@
 package com.example.trackingapi.exceptions;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,13 @@ public class GlobalExceptionHandler {
                 v -> v.getMessage()
             ));
         return ResponseEntity.badRequest().body(errors);
+    }
+    
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, String>> handleIllegalArgument(IllegalArgumentException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        return ResponseEntity.badRequest().body(error);
     }
     
     @ExceptionHandler(MissingServletRequestParameterException.class)

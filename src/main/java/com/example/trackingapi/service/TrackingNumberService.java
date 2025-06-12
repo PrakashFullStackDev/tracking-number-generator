@@ -27,7 +27,7 @@ public class TrackingNumberService {
 	
 	private static final Logger log = LoggerFactory.getLogger(TrackingNumberService.class);
 
-    private final AtomicInteger counter = new AtomicInteger(0);
+    private final AtomicInteger counter = new AtomicInteger(100000);
     private String currentDate = LocalDate.now().toString();
 
         @Async

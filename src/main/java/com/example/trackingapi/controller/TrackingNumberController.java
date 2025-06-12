@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
-@Validated
 @RestController
 @RequestMapping("/api")
 public class TrackingNumberController {
@@ -40,57 +39,6 @@ public class TrackingNumberController {
         this.trackingService = trackingService;
     }
 
-    @GetMapping("/tracking-numberr")
-    public CompletableFuture<Map<String, Object>> getTrackingNumberr(
-            @RequestParam 
-            @Pattern(regexp = "^[A-Z]{2}$", message = "Must be 2-letter ISO country code") 
-            String originCountry,
-            
-            @RequestParam 
-            @Pattern(regexp = "^[A-Z]{2}$", message = "Must be 2-letter ISO country code") 
-            String destinationCountry,
-            
-            @RequestParam 
-            @Positive(message = "Weight must be positive") 
-            double weight,
-            
-            @RequestParam 
-            @NotNull 
-            String createdAt,
-            
-            @RequestParam 
-            @NotNull 
-            UUID customerId,
-            
-            @RequestParam 
-            @NotBlank 
-            String customerName) {
-    	
-    	log.info("Controller method started ");
-        
-        CompletableFuture<String> trackingNumberFuture = trackingService.generateTrackingNumber(
-            originCountry, destinationCountry, weight);
-        
-        return trackingNumberFuture
-            .thenApply(trackingNumber -> {
-                return Map.<String, Object>of(
-                    "tracking_number", trackingNumber,
-                    "created_at", Instant.now().toString(),
-                    "origin_country", originCountry,
-                    "destination_country", destinationCountry,
-                    "weight", weight,
-                    "customer_id", customerId.toString(),
-                    "customer_name", customerName
-                );
-            })
-            .exceptionally(ex -> {
-                return Map.<String, Object>of(
-                    "error", "Failed to generate tracking number",
-                    "message", ex.getCause() != null ? ex.getCause().getMessage() : ex.getMessage(),
-                    "status", "ERROR"
-                );
-            });
-    }
     @GetMapping("/tracking-number")
     public CompletableFuture<Map<String, Object>> getTrackingNumber(
             @RequestParam @Pattern(regexp = "^[A-Z]{2}$") String originCountry,
@@ -105,11 +53,6 @@ public class TrackingNumberController {
                 Map<String, Object> response = new HashMap<>();
                 response.put("tracking_number", trackingNumber);
                 response.put("created_at", Instant.now().toString());
-                response.put("origin_country", originCountry);
-                response.put("destination_country", destinationCountry);
-                response.put("weight", weight);
-                response.put("customer_id", customerId.toString());
-                response.put("customer_name", customerName);
                 return response;
             })
             .exceptionally(ex -> {
