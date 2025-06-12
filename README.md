@@ -2,7 +2,7 @@
 
 # Request Payload
 
-http://localhost:8080/tracking-number?originCountry=US&destinationCountry=UK&weight=1.5&createdAt=2023-01-01T00:00:00Z&customerId=123e4567-e89b-12d3-a456-426614174000&customerName=Test%20Customer
+http://localhost:8080/api/tracking-number?originCountry=IN&destinationCountry=UK&weight=1.5&createdAt=2023-01-01T00:00:00Z&customerId=123e4567-e89b-12d3-a456-426614174000&customerName=Test%20Customer
 
 # Response Payload
 
