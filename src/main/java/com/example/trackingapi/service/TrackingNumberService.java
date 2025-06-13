@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -49,12 +50,13 @@ public class TrackingNumberService {
             if (weight <= 0) {
                 throw new InvalidWeightException("Weight must be positive");
             }
-            Random random = new Random();
-            int randomNumber = random.nextInt();
-
+            UUID uuid = UUID.randomUUID();
+            String randomUUIDString = uuid.toString();
+           log.info(String.format("TN-%s-%s-%s", 
+                    origin, dest, randomUUIDString));
             return CompletableFuture.completedFuture(
-                String.format("TN-%s-%s-%d", 
-                    origin, dest, randomNumber)
+                String.format("TN-%s-%s-%s", 
+                    origin, dest, randomUUIDString)
             );
         }
     
