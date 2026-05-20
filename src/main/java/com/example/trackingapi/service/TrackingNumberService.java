@@ -39,7 +39,7 @@ public class TrackingNumberService {
                 @NotNull String origin, 
                 @NotNull String dest, 
                 @Positive double weight) {
-            log.info("Start method of generateTrackingNumber : ");
+            log.info("Start method of generateTrackingNumber");
             // Validate inputs using custom exceptions
             if (origin == null || !origin.matches("^[A-Z]{2}$") || !StringUtils.hasLength(origin)) {
                 throw new InvalidCountryCodeException("Origin must be a 2-letter ISO country code");
