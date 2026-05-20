@@ -7,7 +7,7 @@
     <groupId>com.example</groupId>
     <artifactId>tracking-api</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>tracking-api</name>
     <description>Tracking API for generating tracking numbers</description>
