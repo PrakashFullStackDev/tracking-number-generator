@@ -47,7 +47,7 @@ public class TrackingNumberController {
             @RequestParam @NotNull String createdAt,
             @RequestParam @NotNull UUID customerId,
             @RequestParam @NotBlank String customerName) {
-    	log.info("Controller method started ");
+    	log.info("Controller method started : ");
         return trackingService.generateTrackingNumber(originCountry, destinationCountry, weight)
             .thenApply(trackingNumber -> {
                 Map<String, Object> response = new HashMap<>();
